@@ -1,34 +1,50 @@
 ﻿using DataAccess.Abstract;
-using Entities.Concrete; 
+using Entities.Abstract;
+using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : IProductDal
     {
-        // The implementations will be completed in v2
-        public void Add(Product product)
+        public void Add(Product entity)
         {
-            throw new NotImplementedException();
+            using NorthwindContext context = new();
+            var addedEntity = context.Entry(entity);
+            addedEntity.State = EntityState.Added;
+            context.SaveChanges();
         }
 
-        public void Delete(Product product)
+        public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            using NorthwindContext context = new();
+            var deletedEntity = context.Entry(entity);
+            deletedEntity.State = EntityState.Deleted;
+            context.SaveChanges();
+        }
+        public void Update(Product entity)
+        {
+            using NorthwindContext context = new();
+            var updatedEntity = context.Entry(entity);
+            updatedEntity.State = EntityState.Deleted;
+            context.SaveChanges();
         }
 
-        public List<Product> GetAll()
+        public Product Get(Expression<Func<Product, bool>> filter)
         {
-            throw new NotImplementedException();
+            using NorthwindContext context = new();
+            return context.Set<Product>().SingleOrDefault(filter);
         }
 
-        public List<Product> GetAllByCategory(int categoryId)
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Product product)
-        {
-            throw new NotImplementedException();
-        }
+            using NorthwindContext context = new();
+            return filter == null
+                ? context.Set<Product>().ToList()
+                : context.Set<Product>().Where(filter).ToList();
+        } 
     }
 }
+
