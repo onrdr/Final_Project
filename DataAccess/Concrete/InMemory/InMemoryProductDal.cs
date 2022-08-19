@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.InMemory
@@ -27,11 +28,6 @@ namespace DataAccess.Concrete.InMemory
         {
             Product productToDelete = _products.SingleOrDefault(p => p.ProductId == product.ProductId);
             _products.Remove(productToDelete);
-        }
-
-        public List<Product> GetAll()
-        {
-            return _products;
         } 
 
         public void Update(Product product)
@@ -41,12 +37,7 @@ namespace DataAccess.Concrete.InMemory
             productToUpdate.CategoryId = product.CategoryId;
             productToUpdate.UnitPrice = product.UnitPrice;
             productToUpdate.UnitsInStock = product.UnitsInStock; 
-        } 
-
-        public List<Product> GetAllByCategory(int categoryId)
-        { 
-            return _products.Where(p => p.CategoryId == categoryId).ToList();
-        }
+        }  
 
         public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
         {
@@ -54,6 +45,11 @@ namespace DataAccess.Concrete.InMemory
         }
 
         public Product Get(Expression<Func<Product, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProductDetailDto> GetProductDetails()
         {
             throw new NotImplementedException();
         }
