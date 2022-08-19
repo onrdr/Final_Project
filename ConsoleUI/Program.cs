@@ -12,15 +12,16 @@ Console.ReadKey();
 
 static void ProductTest()
 {
-    ProductManager productManager = new(new EfProductDal());
+    ProductManager productManager = new(new EfProductDal()); 
 
-    //productManager.GetAll().ForEach(p => Console.WriteLine(p.ProductName));
-
-    //productManager.GetAllByCategoryId(2).ForEach(p => Console.WriteLine($"{p.CategoryId} - {p.ProductName}"));
-
-    //productManager.GetByUnitPrice(40, 100).ForEach(p => Console.WriteLine($"{p.ProductName} - {p.UnitPrice}"));
-
-    //productManager.GetProductDetails().ForEach(p => Console.WriteLine($"{p.ProductName} - {p.CategoryName}"));
+    var result = productManager.GetProductDetails();
+    if (result.Success)
+    {
+        Console.WriteLine(result.Message);
+        result.Data.ForEach(p => Console.WriteLine($"{p.ProductName} - {p.CategoryName}"));
+        return;
+    }
+    Console.WriteLine(result.Message);
 }
 
 static void CategoryTest()
