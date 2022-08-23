@@ -12,7 +12,7 @@ Console.ReadKey();
 
 static void ProductTest()
 {
-    ProductManager productManager = new(new EfProductDal()); 
+    ProductManager productManager = new(new EfProductDal(), new CategoryManager(new EfCategoryDal())); 
 
     var result = productManager.GetProductDetails();
     if (result.Success)
@@ -26,10 +26,9 @@ static void ProductTest()
 
 static void CategoryTest()
 {
-    CategoryManager categoryManager = new(new EfCategoryDal());
-
-    //categoryManager.GetAll().ForEach(c => Console.WriteLine(c.CategoryName));
-
-    //var c = categoryManager.GetById(2);
-    //Console.WriteLine($"{c.CategoryId}: {c.CategoryName}" ); 
+    CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+    foreach (var category in categoryManager.GetAll().Data)
+    {
+        Console.WriteLine(category.CategoryName);
+    }
 }
