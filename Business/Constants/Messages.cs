@@ -1,4 +1,7 @@
 ﻿
+using Core.Entities.Concrete;
+using System.Runtime.Serialization;
+
 namespace Business.Constants
 {
     public static class Messages
@@ -16,5 +19,19 @@ namespace Business.Constants
         public const string ProductNameAlreadyExists = "Cannot add product with the same name";
 
         public const string CategoryLimitExceeded = "Cannot add product due to exceeded category limit";
+
+        public const string AuthorizationDenied = "You are not authorized";
+
+        public const string UserRegistered = "User registered successfully";
+
+        public const string UserNotFound = "User not found";
+
+        public const string PasswordError = "Password error";
+
+        public const string SuccessfulLogin = "Login successfull";
+
+        public const string UserAlreadyExists = "UserAlreadyExists";
+
+        public const string AccessTokenCreated = "AccessTokenCreated";
     }
 }
