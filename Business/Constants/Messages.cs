@@ -30,8 +30,8 @@ namespace Business.Constants
 
         public const string SuccessfulLogin = "Login successfull";
 
-        public const string UserAlreadyExists = "UserAlreadyExists";
+        public const string UserAlreadyExists = "User Already Exists";
 
-        public const string AccessTokenCreated = "AccessTokenCreated";
+        public const string AccessTokenCreated = "Access Token Created";
     }
 }
