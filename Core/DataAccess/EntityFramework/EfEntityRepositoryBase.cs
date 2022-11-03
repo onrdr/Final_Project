@@ -28,7 +28,7 @@ namespace Core.DataAccess.EntityFramework
         {
             using TContext context = new();
             var updatedEntity = context.Entry(entity);
-            updatedEntity.State = EntityState.Deleted;
+            updatedEntity.State = EntityState.Modified;
             context.SaveChanges();
         }
 
